@@ -48,7 +48,7 @@ public class Main {
         boolean nextSchrit = true;
 
         while (true) {
-            System.out.println("Введите тип блюда  (или 'done' для завершения ввода элементов) :");
+            System.out.println("Введите тип блюда числом (или 'done' для завершения ввода элементов) :");
             TypesOfDishes typesOfDishes;
             for (TypesOfDishes key :
                     TypesOfDishes.values()) {
@@ -58,7 +58,12 @@ public class Main {
 
             try {
                 String selectedType = scanner.nextLine();
+                if (selectedType.equalsIgnoreCase("done")) {
+                    nextSchrit = false;
+                    break;
+                }
                 switch (selectedType) {
+
                     case "1":
                         dishType = dc.typesOfDishes.FIRST.name();
                         break;
@@ -81,12 +86,8 @@ public class Main {
                         dishType = dc.typesOfDishes.APPETISE.name();
                         break;
                     default:
-                        System.out.println("Неверный ввод, попробуйте еще раз.");
-                        if (dishType.equalsIgnoreCase("done")) {
-                            nextSchrit = false;
-                            break;
-                        }
-                        continue;
+                        System.out.println("Неверный ввод, попробуйте еще раз.\nВы ввели:" + selectedType );
+                      continue;
                 }
             TypesOfDishes.valueOf(dishType);
 
