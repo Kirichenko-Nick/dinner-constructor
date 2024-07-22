@@ -52,18 +52,46 @@ public class Main {
             TypesOfDishes typesOfDishes;
             for (TypesOfDishes key :
                     TypesOfDishes.values()) {
-                System.out.println(key.ordinal() + 1 + " Название группы: " + key);
+                System.out.println(key.ordinal() + 1 + " Название группы числом: " + key);
             }
+
+
             try {
-                dishType = scanner.nextLine();
-                if (dishType.equalsIgnoreCase("done")) {
-                    nextSchrit = false;
-                    break;
+                String selectedType = scanner.nextLine();
+                switch (selectedType) {
+                    case "1":
+                        dishType = dc.typesOfDishes.FIRST.name();
+                        break;
+                    case "2":
+                        dishType = dc.typesOfDishes.SECOND.name();
+                        break;
+                    case "3":
+
+                        dishType = dc.typesOfDishes.THIRD.name();
+                        break;
+                    case "4":
+
+                        dishType = dc.typesOfDishes.DESSERT.name();
+
+                        break;
+                    case "5":
+                        dishType =  dc.typesOfDishes.DRINKS.name();
+                        break;
+                    case "6":
+                        dishType = dc.typesOfDishes.APPETISE.name();
+                        break;
+                    default:
+                        System.out.println("Неверный ввод, попробуйте еще раз.");
+                        if (dishType.equalsIgnoreCase("done")) {
+                            nextSchrit = false;
+                            break;
+                        }
+                        continue;
                 }
-                TypesOfDishes.valueOf(dishType);
+            TypesOfDishes.valueOf(dishType);
 
             } catch (IllegalArgumentException e) {
-                System.out.println(e + "Такой категории нет. Выбирите категорию из списка ");
+                System.out.println(e +"\n"+ "Такой категории нет. Выбирите категорию из списка ");
                 continue;
             }
 
