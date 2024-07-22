@@ -138,7 +138,7 @@ public class Main {
 
         System.out.println("Текущее состояние списка предложений:");
         for (String mapKey : dc.menuMap.keySet()) {
-            System.out.println("Категория: " + mapKey + ", Бдюдо: " + dc.menuMap.get(mapKey));
+            System.out.println("Категория: " + mapKey + "  Бдюдо: " + dc.menuMap.get(mapKey));
         }
     }
 }
