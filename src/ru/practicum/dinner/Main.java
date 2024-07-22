@@ -77,14 +77,16 @@ public class Main {
                     case "4":
 
                         dishType = dc.typesOfDishes.DESSERT.name();
-
                         break;
+
                     case "5":
                         dishType =  dc.typesOfDishes.DRINKS.name();
                         break;
+
                     case "6":
                         dishType = dc.typesOfDishes.APPETISE.name();
                         break;
+
                     default:
                         System.out.println("Неверный ввод, попробуйте еще раз.\nВы ввели:" + selectedType );
                       continue;
@@ -134,9 +136,9 @@ public class Main {
 
     private static void printCombo () {
 
-        System.out.println("Текущее состояние HashMap:");
+        System.out.println("Текущее состояние списка предложений:");
         for (String mapKey : dc.menuMap.keySet()) {
-            System.out.println("Ключ: " + mapKey + ", Значения: " + dc.menuMap.get(mapKey));
+            System.out.println("Категория: " + mapKey + ", Бдюдо: " + dc.menuMap.get(mapKey));
         }
     }
 }
