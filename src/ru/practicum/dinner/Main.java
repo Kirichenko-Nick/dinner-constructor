@@ -85,6 +85,7 @@ public class Main {
                     scanner.next();
                 }
             }
+            scanner.next();
 
             System.out.println("Вводите типы блюда, разделяя символом переноса строки (enter). Для завершения ввода введите пустую строку");
 
