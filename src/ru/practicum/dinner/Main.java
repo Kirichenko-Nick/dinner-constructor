@@ -22,10 +22,10 @@ public class Main {
                     addNewDish();
                     break;
                 case "2":
-                    //generateDishCombo();
+                    generateDishCombo();
                     break;
                 case "3":
-                    printCombo ();
+                    printCombo();
                     break;
                 case "4":
                     System.out.println("Программа завершена. \nУспехов!!!");
@@ -45,76 +45,24 @@ public class Main {
 
     private static void addNewDish() {
         String dishType = "";
-        boolean nextSchrit = true;
 
-        while (true) {
-            System.out.println("Введите тип блюда числом (или 'done' для завершения ввода элементов) :");
-            TypesOfDishes typesOfDishes;
-            for (TypesOfDishes key :
-                    TypesOfDishes.values()) {
-                System.out.println(key.ordinal() + 1 + " Название группы числом: " + key);
-            }
+        System.out.println("Введите тип блюда:");
+        String selectedType = scanner.nextLine();
 
+        System.out.println("Введите название блюда:");
+        String dishName = scanner.nextLine();
 
-            try {
-                String selectedType = scanner.nextLine();
-                if (selectedType.equalsIgnoreCase("done")) {
-                    nextSchrit = false;
-                    break;
-                }
-                switch (selectedType) {
-
-                    case "1":
-                        dishType = dc.typesOfDishes.FIRST.name();
-                        break;
-                    case "2":
-                        dishType = dc.typesOfDishes.SECOND.name();
-                        break;
-                    case "3":
-
-                        dishType = dc.typesOfDishes.THIRD.name();
-                        break;
-                    case "4":
-
-                        dishType = dc.typesOfDishes.DESSERT.name();
-                        break;
-
-                    case "5":
-                        dishType =  dc.typesOfDishes.DRINKS.name();
-                        break;
-
-                    case "6":
-                        dishType = dc.typesOfDishes.APPETISE.name();
-                        break;
-
-                    default:
-                        System.out.println("Неверный ввод, попробуйте еще раз.\nВы ввели:" + selectedType );
-                      continue;
-                }
-            TypesOfDishes.valueOf(dishType);
-
-            } catch (IllegalArgumentException e) {
-                System.out.println(e +"\n"+ "Такой категории нет. Выбирите категорию из списка ");
-                continue;
-            }
-
-           if (nextSchrit) {
-               System.out.println("Введите название блюда:");
-               String dishName = scanner.nextLine();
-
-               if (dc.menuMap.containsKey(dishType)) {
-                   dc.menuMap.get(dishType).add(dishName);
-               } else {
-                   ArrayList<String> list = dc.menuMap.getOrDefault(dishType, new ArrayList<>());
-                   list.add(dishName);
-                   dc.menuMap.put(dishType, list);
-               }
-           }
-        }   // добавьте новое блюдо
+        if (dc.menuMap.containsKey(selectedType)) {
+            dc.menuMap.get(selectedType).add(dishName);
+        } else {
+            ArrayList<String> list = new ArrayList<>();
+            list.add(dishName);
+            dc.menuMap.put(selectedType, list);
+            System.out.println("vv");
+        }
     }
 
 
-/*
     private static void generateDishCombo() {
         System.out.println("Начинаем конструировать обед...");
 
@@ -123,22 +71,25 @@ public class Main {
         scanner.nextLine();
 
         System.out.println("Вводите типы блюда, разделяя символом переноса строки (enter). Для завершения ввода введите пустую строку");
-        String nextItem = scanner.nextLine();
-
-        //реализуйте ввод типов блюд
-        while (!nextItem.isEmpty()) {
-
+        ArrayList <String> tipSpeise = new ArrayList<>();
+        while (true) {
+            String nextItem = scanner.nextLine();
+            //реализуйте ввод типов блюд
+            if (!nextItem.isEmpty()) {
+                tipSpeise.add(nextItem);
+            } else {
+                break;
+            }
         }
+          dc.constructCombo(numberOfCombos,tipSpeise);
+    }
 
-        // сгенерируйте комбинации блюд и выведите на экран
-
-    }*/
-
-    private static void printCombo () {
+    private static void printCombo() {
 
         System.out.println("Текущее состояние списка предложений:");
         for (String mapKey : dc.menuMap.keySet()) {
             System.out.println("Категория: " + mapKey + "  Бдюдо: " + dc.menuMap.get(mapKey));
         }
     }
+
 }
