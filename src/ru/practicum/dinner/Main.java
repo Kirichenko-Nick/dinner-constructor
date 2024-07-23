@@ -1,6 +1,7 @@
 package ru.practicum.dinner;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -31,6 +32,8 @@ public class Main {
                     System.out.println("Программа завершена. \nУспехов!!!");
                     scanner.close();
                     return;
+                default:
+                    System.out.println("Такой номер команды не существует. Выбирте пожалуйста из списка возможнох");
             }
         }
     }
@@ -67,11 +70,24 @@ public class Main {
         } else {
             System.out.println("Начинаем конструировать обед...");
 
-            System.out.println("Введите количество наборов, которые нужно сгенерировать:");
-            int numberOfCombos = scanner.nextInt();
-            scanner.nextLine();
+            int numberOfCombos = 0;
+            while (true) {
+                System.out.println("Введите количество наборов, которые нужно сгенерировать:");
+                try {
+                    numberOfCombos = scanner.nextInt();
+                    if (numberOfCombos > 0) {
+                        break;
+                    } else {
+                        System.out.println("Значение должно быть больше нуля!");
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("Пожалуйста, введите целое число!");
+                    scanner.next();
+                }
+            }
 
             System.out.println("Вводите типы блюда, разделяя символом переноса строки (enter). Для завершения ввода введите пустую строку");
+
             ArrayList<String> tipSpeise = new ArrayList<>();
             boolean isInMenuTip = false;
             while (true) {
