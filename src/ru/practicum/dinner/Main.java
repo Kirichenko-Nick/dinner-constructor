@@ -63,7 +63,7 @@ public class Main {
     private static void generateDishCombo() {
 
         if (dc.menuMap.isEmpty()) {
-            System.out.println("пока список пуст.");
+            System.out.println("Составьте пожалуйста список предложений.");
         } else {
             System.out.println("Начинаем конструировать обед...");
 

@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class DinnerConstructor {
-    HashMap <String, ArrayList<String>> menuMap = new HashMap<>();
+    HashMap<String, ArrayList<String>> menuMap = new HashMap<>();
 
     void constructCombo(int countCombi, ArrayList<String> comboDiesh) {
         Random random = new Random();
@@ -14,7 +14,7 @@ public class DinnerConstructor {
             System.out.println("Комбинация: " + (i + 1));
 
             for (String dishType : comboDiesh) {
-                ArrayList<String>  combo = menuMap.get(dishType);
+                ArrayList<String> combo = menuMap.get(dishType);
                 String randomMenu = combo.get(random.nextInt(combo.size()));
                 menu.add(randomMenu);
             }
