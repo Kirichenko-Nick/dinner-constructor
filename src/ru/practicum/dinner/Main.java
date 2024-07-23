@@ -33,92 +33,91 @@ public class Main {
                     scanner.close();
                     return;
                 default:
-                    System.out.println("Такой номер команды не существует. Выбирте пожалуйста из списка возможнох");
+                    System.out.println("Такой номер команды не существует. ");
             }
         }
     }
 
-    private static void printMenu() {
-        System.out.println("Выберите команду:");
-        System.out.println("1 - Добавить новое блюдо");
-        System.out.println("2 - Сгенерировать комбинации блюд");
-        System.out.println("3 - Показать меню.");
-        System.out.println("4 - Выход");
-    }
-
-    private static void addNewDish() {
-
-        System.out.println("Введите тип блюда:");
-        String selectedType = scanner.nextLine();
-
-        System.out.println("Введите название блюда:");
-        String dishName = scanner.nextLine();
-
-        if (dc.menuMap.containsKey(selectedType)) {
-            dc.menuMap.get(selectedType).add(dishName);
-        } else {
-            ArrayList<String> list = new ArrayList<>();
-            list.add(dishName);
-            dc.menuMap.put(selectedType, list);
+        private static void printMenu () {
+            System.out.println("Выберите команду:");
+            System.out.println("1 - Добавить новое блюдо");
+            System.out.println("2 - Сгенерировать комбинации блюд");
+            System.out.println("3 - Показать меню.");
+            System.out.println("4 - Выход");
         }
-    }
 
-    private static void generateDishCombo() {
+        private static void addNewDish () {
 
-        if (dc.menuMap.isEmpty()) {
-            System.out.println("Составьте пожалуйста список предложений.");
-        } else {
-            System.out.println("Начинаем конструировать обед...");
+            System.out.println("Введите тип блюда:");
+            String selectedType = scanner.nextLine();
 
-            int numberOfCombos = 0;
-            while (true) {
-                System.out.println("Введите количество наборов, которые нужно сгенерировать:");
-                try {
-                    numberOfCombos = scanner.nextInt();
-                    if (numberOfCombos > 0) {
+            System.out.println("Введите название блюда:");
+            String dishName = scanner.nextLine();
+
+            if (dc.menuMap.containsKey(selectedType)) {
+                dc.menuMap.get(selectedType).add(dishName);
+            } else {
+                ArrayList<String> list = new ArrayList<>();
+                list.add(dishName);
+                dc.menuMap.put(selectedType, list);
+            }
+        }
+
+        private static void generateDishCombo () {
+
+            if (dc.menuMap.isEmpty()) {
+                System.out.println("Составьте пожалуйста список предложений.");
+            } else {
+                System.out.println("Начинаем конструировать обед...");
+/*
+                int numberOfCombos = 0;
+                while (true) {
+                    System.out.println("Введите количество наборов, которые нужно сгенерировать:");
+                    try {
+                        numberOfCombos = scanner.nextInt();
+                        if (numberOfCombos > 0) {
+                            break;
+                        } else {
+                            System.out.println("Значение должно быть больше нуля!");
+                        }
+                    } catch (RuntimeException e) {
+                        System.out.println("Пожалуйста, введите целое число!");
+                        scanner.next();
+                    }
+                }*/
+
+                int numberOfCombos = scanner.nextInt();
+                scanner.next();
+                System.out.println("Вводите типы блюда, разделяя символом переноса строки (enter). Для завершения ввода введите пустую строку");
+
+                ArrayList<String> tipSpeise = new ArrayList<>();
+                boolean isInMenuTip = false;
+                System.out.println("proba 1");
+                while (true) {
+                    String nextItem = scanner.nextLine();
+                    if (!nextItem.isEmpty()) {
+                        isInMenuTip = dc.menuMap.containsKey(nextItem);
+                        if (isInMenuTip) {
+                            tipSpeise.add(nextItem);
+                        } else {
+                            System.out.println("Вы ввели:" + nextItem + "и такой категории нет. \n Введите существующею категорию (см. п. 3)");
+                        }
+                    } else {
                         break;
-                    } else {
-                        System.out.println("Значение должно быть больше нуля!");
                     }
-                } catch (InputMismatchException e) {
-                    System.out.println("Пожалуйста, введите целое число!");
-                    scanner.next();
                 }
+                dc.constructCombo(numberOfCombos, tipSpeise);
             }
-            scanner.next();
-
-            System.out.println("Вводите типы блюда, разделяя символом переноса строки (enter). Для завершения ввода введите пустую строку");
-
-            ArrayList<String> tipSpeise = new ArrayList<>();
-            boolean isInMenuTip = false;
-            while (true) {
-                String nextItem = scanner.nextLine();
-                if (!nextItem.isEmpty()) {
-                    isInMenuTip = dc.menuMap.containsKey(nextItem);
-                    if (isInMenuTip) {
-                        tipSpeise.add(nextItem);
-                    } else {
-                        System.out.println("Вы ввели:" + nextItem + "и такой категории нет. \n Введите существующею категорию (см. п. 3)");
-                    }
-                } else {
-                    if (tipSpeise.isEmpty()) {
-                        return;
-                    }
-                    break;
-                }
-            }
-            dc.constructCombo(numberOfCombos, tipSpeise);
         }
-    }
-    private static void printCombo() {
+        private static void printCombo () {
 
-        System.out.println("Текущее состояние списка предложений:");
-        if (dc.menuMap.isEmpty()) {
-            System.out.println("пока список пуст.");
-        } else {
-            for (String mapKey : dc.menuMap.keySet()) {
-                System.out.println("Категория: " + mapKey + "  Бдюдо: " + dc.menuMap.get(mapKey));
+            System.out.println("Текущее состояние списка предложений:");
+            if (dc.menuMap.isEmpty()) {
+                System.out.println("пока список пуст.");
+            } else {
+                for (String mapKey : dc.menuMap.keySet()) {
+                    System.out.println("Категория: " + mapKey + "  Бдюдо: " + dc.menuMap.get(mapKey));
+                }
             }
         }
     }
-}
