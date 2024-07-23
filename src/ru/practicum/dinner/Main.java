@@ -96,10 +96,12 @@ public class Main {
                     if (isInMenuTip) {
                         tipSpeise.add(nextItem);
                     } else {
-                        System.out.println("Вы ввели:" + nextItem + "и такой категории нет. \n Введите существующею категорию (см. п. 3)");
+                        System.out.println("Вы ввели:" + nextItem + " и такой категории нет. \n Введите существующею категорию (см. п. 3)");
+                           tipSpeise.clear();
                     }
                 } else {
                     if (tipSpeise.isEmpty()) {
+                        System.out.println("Вы нажали ввод и прервали создание комбинации\n");
                         return;
                     }
                     break;
